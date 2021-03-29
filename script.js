@@ -94,6 +94,24 @@ for (const operator of operators) {
                 }   
             break;
 
+            /**
+             * Caso particular para -
+             * Se o historico vazio e o display vazio o usuario quer digitar um numero negativo
+             * Caso contrario esta realizando uma subtração que sera calculada como em default
+             */
+            case "-":
+                if(getHistory() == '' && getOutput() == ''){
+                    printOutput("-")
+                }else if(getHistory() != ''){
+                    var result  = eval(`${getHistory()} ${getOutput()}`)
+                    clearAll()
+                    printHistory(`${result} ${operator.id}`)  
+                }else {
+                    printHistory(`${getOutput()} ${operator.id}`)
+                    printOutput("")  
+                }
+            break;
+
             /*
              * Caso a entrada seja = 
              * Se existe um histórico e um valor no display 
