@@ -1,5 +1,6 @@
 //Variavel numbers recebe os elementos da DOM com classe number
 var numbers = document.getElementsByClassName("number")
+
 //Variavel operator recebe os elementos da DOM com classe operator
 var operators = document.getElementsByClassName("operator")
 
@@ -12,7 +13,7 @@ function getOutput() {
 function printOutput(num){
     if(num == "" ){
         document.getElementById("output-value").innerText=num
-    }else if(getOutput().length <= 18){
+    }else if(getOutput().length < 17){
         document.getElementById("output-value").innerText+=num
     }
 }
@@ -68,9 +69,11 @@ for (const operator of operators) {
             * Em seguida limpa a tela e escreve o valor de tempBackspace           
             */
             case 'backspace':
-                var tempBackspace = getOutput().substring(0,getOutput().length-1)
-                printOutput("")
-                printOutput(tempBackspace)
+                if(getOutput() != 'Infinity' && getOutput() != 'Not exists'){
+                    var tempBackspace = getOutput().substring(0,getOutput().length-1)
+                    printOutput("")
+                    printOutput(tempBackspace)
+                }
             break;
 
             /*
@@ -84,6 +87,10 @@ for (const operator of operators) {
                     printOutput("")
                     printOutput("Infinity")
                 }
+                else if(getOutput() < 0){
+                    printOutput("")
+                    printOutput("Not exists")
+                }
                 else{
                     let fatResult = 1
                     for (let i = 1; i <= getOutput() ; i++) {
@@ -96,17 +103,18 @@ for (const operator of operators) {
 
             /**
              * Caso particular para -
-             * Se o historico vazio e o display vazio o usuario quer digitar um numero negativo
-             * Caso contrario esta realizando uma subtração que sera calculada como em default
+             * Se o historico vazio o usuario quer digitar um numero negativo
+             * Se o historico diferente de vazio, quer realizar uma operação sucessiva
+             * Caso nenhuma satisfeita e o display não tenha um sinal apenas um sinal negativo, quer realizar a primeira subtração
              */
             case "-":
-                if(getHistory() == '' && getOutput() == ''){
+                if(getOutput() == ''){
                     printOutput("-")
                 }else if(getHistory() != ''){
                     var result  = eval(`${getHistory()} ${getOutput()}`)
                     clearAll()
                     printHistory(`${result} ${operator.id}`)  
-                }else {
+                }else if(getOutput() != '-'){
                     printHistory(`${getOutput()} ${operator.id}`)
                     printOutput("")  
                 }
@@ -126,6 +134,29 @@ for (const operator of operators) {
                 }
             break;
 
+            /**
+             * Caso a entrada seja %
+             * Então limpa a tela e escreve o valor dividido por 100 no display
+             */
+            case '%':
+                var result  = getOutput()/100
+                    printOutput("")
+                    printOutput(result)  
+                
+            break;
+
+            /**
+             * Caso a entrada seja .
+             * Verifica se existe o caracter . na string
+             * Caso não exista insere o valor
+             * Caso contrário não faz nada
+             */
+            case '.':
+                if(getOutput().indexOf('.') == -1){  
+                    printOutput(".")  
+                } 
+            break;
+                        
             /**
              * Caso seja qualquer outro operador
              * Se o display não estiver vazio

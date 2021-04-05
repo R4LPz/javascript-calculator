@@ -8,7 +8,7 @@ body{
 }
 
 #container{
-    width: 90vw;
+    width: 50vw;
     max-width: 1000px;
     height: 85vh;
     min-height: 550px;
@@ -19,8 +19,10 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 255, 255, 0.3);
     margin: 0 auto;
+    border-radius: 32px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.6);
 }
 
 #calculator{
@@ -43,6 +45,7 @@ body{
     padding-top: 20px ;
     font-size: 15px;
     color: #919191;
+    font-family: 'Roboto', sans-serif;
 }
 
 #output{
@@ -50,6 +53,7 @@ body{
     height: 60px;
     margin: 10px 20px;
     font-size: 30px;
+    font-family: 'Roboto', sans-serif;
 }
 
 #keyboard{
@@ -59,6 +63,7 @@ body{
 }
 
 .operator, .number, .empty{
+    font-family: 'Roboto', sans-serif;
     width: 50px;
     height: 50px;
     margin: 15px;
@@ -66,6 +71,12 @@ body{
     border-width: 0;
     font-weight: bold;
     font-size: 16px;
+    transition: 300ms;
+    
+}
+
+.operator:hover, .number:hover, .empty:hover{
+    font-size: 20px;
 }
 
 .number, .empty{
@@ -85,6 +96,10 @@ body{
 }
 .operator{
     background-color: rgba(0, 0, 0, 0.15);
+}
+
+.end{
+    background-color: transparent;
 }
 
 :nth-child(4),:nth-child(8),:nth-child(12),:nth-child(16),:nth-child(20){
