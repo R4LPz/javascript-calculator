@@ -105,3 +105,11 @@ body{
 :nth-child(4),:nth-child(8),:nth-child(12),:nth-child(16),:nth-child(20){
     background-color: orange;
 }
+
+@media (max-width: 768px)
+{
+    #container{
+        background-color: transparent;
+        box-shadow: none;
+    }
+}
